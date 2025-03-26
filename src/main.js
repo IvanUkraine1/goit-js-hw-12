@@ -13,6 +13,8 @@ let loadBtn = document.querySelector(".load-btn");
 let currentPage = 1;
 let inputValue;
 
+loader.style.display = "none";
+
 form.addEventListener("submit", async (event)=>{
     event.preventDefault();
     inputValue = input.value;

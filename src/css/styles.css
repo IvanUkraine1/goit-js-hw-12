@@ -109,7 +109,7 @@ button:hover{
   position: relative;
   left: 47%;
   animation: rotate 1s linear infinite;
-  display: none;
+  display: flex;
 }
 
 .loader::before {
