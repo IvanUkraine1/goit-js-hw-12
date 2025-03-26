@@ -7,12 +7,135 @@
 /* Common styles */
 @import url('./reset.css');
 @import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  margin: 36px 0 32px 0;
+}
+
+input {
+  width: 272px;
+  height: 100%;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 4%;
+  border-radius: 4px;
+  border: 1px solid rgba(128, 128, 128, 1);
+}
+
+input:hover {
+  border: 1px solid rgba(0, 0, 0, 1);
+}
+
+input:focus {
+  border: 1px solid rgba(78, 117, 255, 1);
+  outline: none; 
+}
+
+button{
+  padding: 8px 16px;
+  font-weight: 500;
+  font-style: 16px;
+  line-height: 24px;
+  letter-spacing: 4%;
+  color: rgba(255, 255, 255, 1);
+  background-color: rgba(78, 117, 255, 1);
+  border-radius: 8px;
+  border: none;
+}
+
+button:hover{
+  background-color: rgba(108, 140, 255, 1);
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+  padding-bottom: 32px;
+}
+
+.gallery-item {
+  position: relative;
+  width: 360px;
+  overflow: hidden;
+  border: 1px solid #808080;
+}
+
+.gallery-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.image-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 8px 0;
+  font-size: 14px;
+  background: #FFFFFF;
+}
+
+.image-info-element {
+  text-align: center;
+}
+
+.image-info-element b {
+  display: block;
+  font-size: 12px;
+}
+
+.loader {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  position: relative;
+  left: 47%;
+  animation: rotate 1s linear infinite;
+  display: none;
+}
+
+.loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 5px solid #808080;
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}
+
+.load-btn {
+  display: none;
+  max-width: fit-content;
+  margin: 0 auto 44px;
+}
