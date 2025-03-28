@@ -12,8 +12,9 @@ galleryShow.on('shown.simplelightbox', function () {
 	
 });
 
+let gallery = document.querySelector(".gallery");
+
 export function drawGallery (imageArray){
-    let gallery = document.querySelector(".gallery");
 
     let markup = imageArray.map(image => 
         `
@@ -51,3 +52,6 @@ export function drawGallery (imageArray){
     galleryShow.refresh();
 }
 
+export function clearGallery(){
+    gallery.innerHTML = "";
+}

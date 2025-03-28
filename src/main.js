@@ -2,14 +2,15 @@
 import iziToast from "izitoast";
 // Додатковий імпорт стилів
 import "izitoast/dist/css/iziToast.min.css";
-import {drawGallery} from './js/render-functions';
-import { getPhotos, getTotalHits } from './js/pixabay-api';
+import {drawGallery, clearGallery} from './js/render-functions';
+import {getPhotos} from './js/pixabay-api';
 
 let gallery = document.querySelector(".gallery");
 let form = document.querySelector(".form");
 let input = document.querySelector('[name="search-text"]');
 let loader = document.querySelector(".loader");
 let loadBtn = document.querySelector(".load-btn");
+let response;
 let currentPage = 1;
 let inputValue;
 
@@ -23,18 +24,18 @@ form.addEventListener("submit", async (event)=>{
         // console.log("Заповніть поле пошуку");
         return;
     }
-    gallery.innerHTML = "";
+    clearGallery();
     loader.style.display = "block";
 
     try{
-        let response = await getPhotos(inputValue, currentPage);
-        let images = response.data.hits;
+        response = await getPhotos(inputValue, currentPage);
+        let images = response.hits;
 
         if(images.length > 0){
         // console.log(response.data)
         drawGallery(images);
 
-        let totalPages = await getTotalHits(inputValue);
+        let totalPages = Math.ceil(response.totalHits / 15);
         // console.log(totalPages);
         if(totalPages < 0){
             loadBtn.style.display = "none";
@@ -61,28 +62,30 @@ form.addEventListener("submit", async (event)=>{
 loadBtn.addEventListener("click", async () =>{
     currentPage++;
     loader.style.display = "block";
-
+    loadBtn.style.display = "none";
+    
     try{
-    let totalPages = await getTotalHits(inputValue);
+        let totalPages = Math.ceil(response.totalHits / 15);
 
     if(currentPage <= totalPages){
-        let initialItemsCount = document.querySelectorAll(".gallery-item").length;
-        let response = await getPhotos(inputValue, currentPage);
-        let images = response.data.hits;
 
-            drawGallery(images);
+        response = await getPhotos(inputValue, currentPage);
+        let images = response.hits;
 
-            setTimeout(() => {
-                let items = document.querySelectorAll(".gallery-item");
-                if (items.length > initialItemsCount) {
-                    let rect = items[initialItemsCount].getBoundingClientRect();
-                    // console.log(rect.height);
-                    window.scrollBy({
-                        top: (rect.height * 3) + (3 * 16),
-                        behavior: "smooth",
-                    });
-                }
-            }, 300);
+        drawGallery(images);
+
+        loadBtn.style.display = "flex";
+
+        setTimeout(() => {
+            let item = document.querySelector(".gallery-item");
+            let rect = item.getBoundingClientRect();
+            // console.log(((rect.height * 3) + (3 * 16)));
+                window.scrollBy({
+                    top: (rect.height * 2) + (2 * 16),
+                    behavior: "smooth",
+                });
+        }, 300);
+        //без setTimeout воно проскролить до того як домалювало всі елементи на сторінку
             
                 
             
