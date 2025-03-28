@@ -5,7 +5,6 @@ import "izitoast/dist/css/iziToast.min.css";
 import {drawGallery, clearGallery} from './js/render-functions';
 import {getPhotos} from './js/pixabay-api';
 
-let gallery = document.querySelector(".gallery");
 let form = document.querySelector(".form");
 let input = document.querySelector('[name="search-text"]');
 let loader = document.querySelector(".loader");
