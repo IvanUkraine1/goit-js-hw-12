@@ -14,7 +14,7 @@ let currentPage = 1;
 let inputValue;
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector(".loader").style.display = "none";
+    loader.style.display = "none";
   });
 
 form.addEventListener("submit", async (event)=>{
